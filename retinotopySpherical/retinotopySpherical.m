@@ -17,7 +17,7 @@ folderName = [settings.mouseName, '_', ...
     '_retino'];
 % settings.saveDir = fullfile('Z:\HarveyLab\Matthias\data\imaging\widefield', ...
 %     settings.mouseName, folderName);
-settings.saveDir = fullfile('E:\Data\ShihYi\', ...
+settings.saveDir = fullfile('D:\Data\Jonathan', ...
     settings.mouseName, folderName);
 clipboard('copy', fullfile(settings.saveDir, 'mov'));
 if ~exist(settings.saveDir, 'dir')
@@ -26,20 +26,20 @@ if ~exist(settings.saveDir, 'dir')
 end
 
 % 10 reps was not enough with transgenic. Try 20.
-settings.nRepeats = 50; % How often each direction is repeated, i.e. there will be 4 times as many sweeps. Garrett uses 6-10 times 10, so up to 100 sweeps!
-settings.nRepeatsPerBlock = 6;
-settings.barWidth_deg = 5; % Marshel uses 20
-settings.barSpeed_dps = 4; % Marshel uses 8.5-9.5 dps
+settings.nRepeats = 120; % 60 How often each direction is repeated, i.e. there will be 4 times as many sweeps. Garrett uses 6-10 times 10, so up to 100 sweeps!
+settings.nRepeatsPerBlock = 10; % 10
+settings.barWidth_deg = 12.5; % Marshel uses 20
+settings.barSpeed_dps = 10; % Marshel uses 8.5-9.5 dps
 settings.checkerWidth_deg = 1/0.08;
 settings.checkerBlink_hz = 3; % Marshel uses 6n3 Hz
-settings.minDistEyeToScreen_mm = 110;
+settings.minDistEyeToScreen_mm = 140;
 settings.screenOri_xyPix = [-10, 55];
 settings.pixelReductionFactor = 5; % How much the texture is downsampled...affects frame rate.
 settings.fpsStim = 60; % Target display/acquisition rate. Max is 120 Hz (monitor refresh)
 settings.camFrameStride = 1; % The camera takes one picture every this many frames.
 settings.isBlueMonitorChannelOnly = false;
 settings.isSessionRunning = true;
-
+ 
 saveFileName = fullfile(settings.saveDir, ...
     [datestr(now, 'yyyymmdd_HHMMSS'), '_retinotopy_', settings.mouseName]);
 
@@ -56,16 +56,16 @@ if ~strcmp(button, 'Yes')
 end
 
 %% Run this to find the screen origin:
-if false
+if 0
     screenId = 1; %#ok<UNRCH>
     res = Screen('Resolution', screenId);
-    while KbCheck
+    while KbCheck 
     end
-    
-    while ~KbCheck
+     
+    while ~KbCheck 
         [x, y] = GetMouse(screenId);
         fprintf('Mouse pos x: %1.0f, y:%1.0f\n', x-res.width/2, y-res.height/2)
-        pause(0.3)
+        pause(0.3) 
     end
 end
 
@@ -115,10 +115,10 @@ else
     oldPriority = Priority(1);
 %     blackOutWin = Screen('OpenWindow', 1, 0);
 end
-
+Screen('Preference', 'SkipSyncTests', 1);
 Screen('Preference', 'VisualDebugLevel', 1); % Suppress white intro screen.
 screen.win = PsychImaging('OpenWindow',  screen.id, 0, [], [], [], [], screen.isAntiAliasing);
-load('C:\Users\harveylab\Documents\GitHub\harveyLab\widefieldImaging\intrinsicScope_gammaTable_160725.mat')
+load('C:\Users\GreenJonathan\Documents\GitHub\widefieldImaging\intrinsicScope_gammaTable_160725.mat')
 Screen('LoadNormalizedGammaTable', screen.win, gammaTable*[1 1 1]);
 screen.fullRect = Screen('Rect', screen.win);
 % Set alpha blending settings (for fading to black at the end of a trial).

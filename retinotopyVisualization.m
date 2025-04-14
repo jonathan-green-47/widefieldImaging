@@ -1,7 +1,9 @@
 %% Load data:
-%pBase = 'Z:\HarveyLab\Laura\DATA\widefield';
-pBase = 'E:\Data\ShihYi';
-mouse = '10';
+%pBase = 'Z:\HarveyLab\Tier1\Jonathan\Behavior_Imaging_Data\Widefield';
+
+pBase = 'D:\Data\Jonathan';
+
+mouse = 'JG783';
 ls = dir(fullfile(pBase, mouse, [mouse '_*']));
 ls = ls([ls.isdir]);
 

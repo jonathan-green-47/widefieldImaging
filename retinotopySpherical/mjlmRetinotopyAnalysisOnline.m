@@ -4,13 +4,17 @@ function dat = mjlmRetinotopyAnalysisOnline
 dbstop if error % In case anything fails before saving.
 
 %% Settings:
-mouseName = '10';
-dateStr = '170823';
+
+mouseName = 'JG783';
+dateStr = '250410';
 nBinTemp = 1; % How much movie was binned during preprocessing.
 
 % widefieldBase = '\\research.files.med.harvard.edu\Neurobio\HarveyLab\Matthias\data\imaging\widefield';
 % widefieldBase = '\\intrinsicScope\E\Data\Matthias';
-widefieldBase = 'E:\Data\ShihYi';
+widefieldBase = 'D:\Data\Jonathan\';
+%   widefieldBase = 'D:\Data\Dan\';
+
+%widefieldBase = '\\research.files.med.harvard.edu\Neurobio\HarveyLab\Tier1\Jonathan\Behavior_Imaging_Data\Widefield';
 datFolder = fullfile(widefieldBase, mouseName, [mouseName '_' dateStr '_retino']);
 movFolder = fullfile(datFolder, 'mov');
 
@@ -261,7 +265,7 @@ for iCond = 1:nCond
                 tuningHere = min(max(tuningHere, -5000), 5000);
                 tiffWrite(mat2gray(tuningHere)*2^16, ...
                     sprintf('tuning_cond%d.tif', ...
-                    iCond), 'E:\temp');
+                    iCond), 'D:\temp');
             catch err
                 warning('Error while saving intermediate result:\n%s', ...
                     err.message)
@@ -285,7 +289,7 @@ f = sprintf('%s_results%s', f, datestr(now, 'yymmdd'));
 dat = load(datFile);
 dat.results = results;
 try
-    save(fullfile(p, f), '-struct', 'dat');
+    save(fullfile(p, f), '-struct', 'dat');%, '-v7.3');
 catch err
     throwAsWarning(err)
 end
